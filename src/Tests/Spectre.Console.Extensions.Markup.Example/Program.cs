@@ -4,6 +4,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        AnsiConsole.WriteLine("Hello, World!");
+        var md = MarkupExample.GetSampleText();
+        var markup = new MarkdownRenderable(md);
+        AnsiConsole.Write(markup);
     }
 }

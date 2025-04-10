@@ -22,18 +22,11 @@ internal static class MarkupExample
         ##### h5 Heading
         ###### h6 Heading
 
-
         ## Horizontal Rules
-
-        ___
-
         ---
-
         ***
 
-
         ## Typographic replacements
-
         Enable typographer option to see result.
 
         (c) (C) (r) (R) (tm) (TM) (p) (P) +-
@@ -48,28 +41,20 @@ internal static class MarkupExample
         ## Emphasis
 
         **This is bold text**
-
         __This is bold text__
-
         *This is italic text*
-
         _This is italic text_
-
         ~~Strikethrough~~
 
-
         ## Blockquotes
-
 
         > Blockquotes can also be nested...
         >> ...by using additional greater-than signs right next to each other...
         > > > ...or with spaces between arrows.
 
-
         ## Lists
 
         Unordered
-
         + Create a list by starting a line with `+`, `-`, or `*`
         + Sub-lists are made by indenting 2 spaces:
             - Marker character change forces new list start:
@@ -79,32 +64,25 @@ internal static class MarkupExample
         + Very easy!
 
         Ordered
-
         1. Lorem ipsum dolor sit amet
         2. Consectetur adipiscing elit
         3. Integer molestie lorem at massa
-
 
         1. You can use sequential numbers...
         1. ...or keep all the numbers as `1.`
 
         Start numbering with offset:
-
         57. foo
         1. bar
 
-
         ## Code
-
         Inline `code`
 
         Indented code
-
             // Some comments
             line 1 of code
             line 2 of code
             line 3 of code
-
 
         Block code "fences"
 
@@ -114,13 +92,70 @@ internal static class MarkupExample
 
         Syntax highlighting
 
-        ``` js
+        ```js
         var foo = function (bar) {
           return bar++;
         };
 
         console.log(foo(5));
         ```
+
+        ```csharp
+        using System;
+        
+        public readonly record struct class Program {
+            public static void Main() {
+                Console.WriteLine("Hello, World!");
+            }
+        }
+        ```
+
+        ```json
+                {
+            "glossary": {
+                "title": "example glossary",
+                "GlossDiv": {
+                    "title": "S",
+                    "GlossList": {
+                        "GlossEntry": {
+                            "ID": "SGML",
+                            "SortAs": "SGML",
+                            "GlossTerm": "Standard Generalized Markup Language",
+                            "Acronym": "SGML",
+                            "Abbrev": "ISO 8879:1986",
+                            "GlossDef": {
+                                "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                                "GlossSeeAlso": ["GML", "XML"]
+                            },
+                            "GlossSee": "markup"
+                        }
+                    }
+                }
+            }
+        }
+        ```
+
+        ```xml
+                <!DOCTYPE glossary PUBLIC "-//OASIS//DTD DocBook V3.1//EN">
+         <glossary><title>example glossary</title>
+          <GlossDiv><title>S</title>
+           <GlossList>
+            <GlossEntry ID="SGML" SortAs="SGML">
+             <GlossTerm>Standard Generalized Markup Language</GlossTerm>
+             <Acronym>SGML</Acronym>
+             <Abbrev>ISO 8879:1986</Abbrev>
+             <GlossDef>
+              <para>A meta-markup language, used to create markup
+        languages such as DocBook.</para>
+              <GlossSeeAlso OtherTerm="GML">
+              <GlossSeeAlso OtherTerm="XML">
+             </GlossDef>
+             <GlossSee OtherTerm="markup">
+            </GlossEntry>
+           </GlossList>
+          </GlossDiv>
+         </glossary>
+         ```
 
         ## Tables
 
