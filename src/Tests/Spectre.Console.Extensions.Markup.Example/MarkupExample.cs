@@ -102,7 +102,8 @@ internal static class MarkupExample
 
         ```csharp
         using System;
-        
+
+        // Main method
         public readonly record struct class Program {
             public static void Main() {
                 Console.WriteLine("Hello, World!");
@@ -136,21 +137,23 @@ internal static class MarkupExample
         ```
 
         ```xml
-                <!DOCTYPE glossary PUBLIC "-//OASIS//DTD DocBook V3.1//EN">
-         <glossary><title>example glossary</title>
-          <GlossDiv><title>S</title>
+         <?xml version="1.0"?>
+         <glossary>
+           <title>example glossary</title>
+           <GlossDiv><title>S</title>
            <GlossList>
+            <!-- GlossEntry -->
             <GlossEntry ID="SGML" SortAs="SGML">
              <GlossTerm>Standard Generalized Markup Language</GlossTerm>
              <Acronym>SGML</Acronym>
              <Abbrev>ISO 8879:1986</Abbrev>
              <GlossDef>
-              <para>A meta-markup language, used to create markup
-        languages such as DocBook.</para>
-              <GlossSeeAlso OtherTerm="GML">
-              <GlossSeeAlso OtherTerm="XML">
+              <para>A meta-markup language, used to create markup languages such as DocBook.</para>
+              <GlossSeeAlso OtherTerm="GML" >
+              <GlossSeeAlso OtherTerm="XML" >
+              <![CDATA[This is CDATA content.]]>
              </GlossDef>
-             <GlossSee OtherTerm="markup">
+             <GlossSee OtherTerm="markup"/>
             </GlossEntry>
            </GlossList>
           </GlossDiv>

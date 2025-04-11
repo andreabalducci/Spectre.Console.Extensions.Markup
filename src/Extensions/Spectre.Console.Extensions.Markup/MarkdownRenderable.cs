@@ -2,8 +2,10 @@ using System.Text;
 using Markdig;
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
+using Spectre.Console.CSharp;
 using Spectre.Console.Json;
 using Spectre.Console.Rendering;
+using Spectre.Console.Xml;
 
 namespace Spectre.Console.Extensions.Markup;
 public sealed class MarkdownRenderable(string markdown) : Renderable
@@ -51,7 +53,7 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
         };
     }
 
-    private IRenderable BuildingHeadingBlock(HeadingBlock heading)
+    private static IRenderable BuildingHeadingBlock(HeadingBlock heading)
     {
         var sb = new StringBuilder();
         if (heading.Inline != null)
@@ -77,7 +79,7 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
         return new Rows(headerRow, rowRow);
     }
 
-    private IRenderable CreateTextBlock(LeafBlock textBlock)
+    private static IRenderable CreateTextBlock(LeafBlock textBlock)
     {
         var sb = new StringBuilder();
         if (textBlock.Inline != null)
@@ -93,7 +95,7 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
         return grid;
     }
 
-    private IRenderable BuildCodeControl(CodeBlock codeBlock)
+    private static IRenderable BuildCodeControl(CodeBlock codeBlock)
     {
         var sb = new StringBuilder();
         var lines = codeBlock.Lines.Lines;
@@ -104,24 +106,37 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
         }
 
 
-        Panel panel = null;
+        Panel? panel = null;
 
         if (codeBlock is FencedCodeBlock fencedCodeBlock && !string.IsNullOrEmpty(fencedCodeBlock.Info))
         {
-            if (fencedCodeBlock.Info == "json")
+            if (string.Equals(fencedCodeBlock.Info, "json", StringComparison.OrdinalIgnoreCase))
             {
-                var jsonText = new JsonText(sb.ToString().EscapeMarkup().Trim());
+                var jsonText = new JsonText(sb.ToString().Trim());
                 panel = new Panel(jsonText)
+                {
+                    Header = new PanelHeader(fencedCodeBlock.Info.EscapeMarkup())
+                };
+            }
+            else if (string.Equals(fencedCodeBlock.Info, "csharp", StringComparison.OrdinalIgnoreCase))
+            {
+                var csharpText = new CSharpText(sb.ToString().Trim());
+                panel = new Panel(csharpText)
+                {
+                    Header = new PanelHeader(fencedCodeBlock.Info.EscapeMarkup())
+                };
+            }
+            else if (string.Equals(fencedCodeBlock.Info, "xml", StringComparison.OrdinalIgnoreCase))
+            {
+                var xmlText = new XmlText(sb.ToString().Trim());
+                panel = new Panel(xmlText)
                 {
                     Header = new PanelHeader(fencedCodeBlock.Info.EscapeMarkup())
                 };
             }
         }
 
-        if (panel == null)
-        {
-            panel = new Panel(sb.ToString().EscapeMarkup().Trim());
-        }
+        panel ??= new Panel(sb.ToString().EscapeMarkup().Trim());
 
         panel.BorderStyle = Color.Blue;
         panel.Padding = new Padding(1, 0, 0, 0);
@@ -194,7 +209,7 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
         return table;
     }
 
-    private void AddInlineContent(StringBuilder sb, ContainerInline textBlockInline)
+    private static void AddInlineContent(StringBuilder sb, ContainerInline textBlockInline)
     {
         foreach (var inline in textBlockInline)
         {
@@ -225,7 +240,7 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
                     break;
 
                 case LineBreakInline:
-                    sb.Append(" ");
+                    sb.Append(' ');
                     break;
 
                 default:

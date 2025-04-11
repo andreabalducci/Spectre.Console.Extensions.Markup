@@ -15,4 +15,9 @@
     <PackageReference Include="Spectre.Console.Json" Version="0.50.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Spectre.Console.CSharp\Spectre.Console.CSharp.csproj" />
+    <ProjectReference Include="..\..\Spectre.Console.Xml\Spectre.Console.Xml.csproj" />
+  </ItemGroup>
+
 </Project>
