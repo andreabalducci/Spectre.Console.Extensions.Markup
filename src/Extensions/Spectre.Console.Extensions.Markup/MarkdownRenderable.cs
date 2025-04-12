@@ -88,9 +88,8 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
         }
 
         var grid = new Grid { Width = 120, }
-            .AddColumn();
-            //.AddRow(new MarkdownRenderable(sb.ToString()));
-            //.AddRow(new MarkdownRenderable(sb.ToString()));
+            .AddColumn()
+            .AddRow(new Console.Markup(sb.ToString()));
 
         return grid;
     }
