@@ -205,3 +205,72 @@ internal sealed class XmlTokenizer
         return tokens;
     }
 }
+
+/*
+ 
+* ------------------------------------------------------------------------------- *
+   This was (mainly) build with the following prompt (chatgpt):
+* ------------------------------------------------------------------------------- *
+  
+ Can you write a XML parser in C#. You should create a Parse method with
+
+- input: xml string
+- output: List<(start, length, XmlSyntaxType>
+
+where start is the position (index) in the xml string.
+
+XmlSyntaxType is defined as follows:
+
+```csharp
+internal enum XmlSyntaxKind
+{
+    None,           // Represents no specific kind
+    ElementName,    // Represents an XML element name. eg <element>
+    Text,           // Represents text content within an XML element
+    Comment,        // Represents an XML comment. Everything including <!-- ... -->
+    ProcessingInstruction, // Represents an XML processing instruction. e.g. <?xml version="1.0"?>
+    DocumentTypeDeclaration // A document type declaration, or DOCTYPE, is an instruction that associates a particular XML or SGML document (for example, a web page) with a document type definition (DTD)
+    CData,          // Represents a CDATA section
+    Whitespace,     // Represents whitespace
+    EndElement,     // Represents the end of an XML element (e.g. <element/> )
+    Declaration,    // Represents an XML declaration (e.g., <?xml version="1.0"?>)
+    OpeningAngleBracket, // <
+    ClosingAngleBracket, // >
+    AttributeName,   // Name of the attribute
+    AttributeEquals, // =
+    AttributeValue,  // Represents the value of an XML attribute
+    AttributeQuote,  // " or '
+    SelfClosingSlash,  // / => Represents a self-closing tag (e.g., <element/>)
+}
+```
+
+Example: If you encounter <element/>, you will list OpeningAngleBracket (<), EndElement (element), SelfClosingSlash (/) and ClosingAngleBracket (>) 
+
+Do not use XmlReader or any other library or package. Just go through the string.
+
+It should be able to parse the following xml, although it may not be valid:
+
+```xml
+ <!DOCTYPE glossary PUBLIC "-//OASIS//DTD DocBook V3.1//EN">
+ <glossary><title>example glossary</title>
+  <GlossDiv><title>S</title>
+   <GlossList>
+    <GlossEntry ID="SGML" SortAs="SGML">
+     <GlossTerm>Standard Generalized Markup Language</GlossTerm>
+     <Acronym>SGML</Acronym>
+     <Abbrev>ISO 8879:1986</Abbrev>
+     <GlossDef>
+      <para>A meta-markup language, used to create markup
+languages such as DocBook.</para>
+      <GlossSeeAlso OtherTerm="GML">
+      <GlossSeeAlso OtherTerm="XML">
+     </GlossDef>
+     <GlossSee OtherTerm="markup">
+    </GlossEntry>
+   </GlossList>
+  </GlossDiv>
+ </glossary>
+```
+
+The result of the method will be used to write syntax highlighting. so xml validity is less important. 
+*/
