@@ -4,42 +4,64 @@ namespace Spectre.Console.Xml;
 
 internal sealed class XmlSyntax
 {
-    private readonly string _xmlText;
-    private readonly XmlBuilderContext _context;
+    private readonly string _xml;
 
-    public XmlSyntax(string xmlText, XmlBuilderContext context)
+    public XmlSyntax(string xmlText)
     {
-        _xmlText = xmlText;
-        _context = context;
+        _xml = xmlText;
     }
 
-    internal void Accept(XmlStyleBuilder xmlBuilder)
+    internal Paragraph BuildStyledXmlParagraph(XmlTextStyles styles)
     {
-        var tokens = XmlTokenizer.ParseText(_xmlText);
-        xmlBuilder.Visit(tokens, _context);
-
-        var sortedSegments = xmlBuilder.StyledSegments.OrderBy(s => s.Span.Start).ToList();
+        var tokens = XmlTokenizer.ParseText(_xml);
+        var sortedTokens = tokens.OrderBy(s => s.Span.Start).ToList();
         var index = 0;
 
-        foreach (var (span, style) in sortedSegments)
+        var paragraph = new Paragraph();
+
+        foreach (var token in sortedTokens)
         {
-            if (index < span.Start)
+            var style = GetStyle(token.Kind, styles);
+
+            if (index < token.Span.Start)
             {
-                _context.Paragraph.Append(
-                    _xmlText.Substring(index, span.Start - index),
+                paragraph.Append(
+                    _xml.Substring(index, token.Span.Start - index),
                     style
                 );
             }
 
-            var tokenText = _xmlText.Substring(span.Start, span.Length);
+            var tokenText = _xml.Substring(token.Span.Start, token.Span.Length);
             Debug.Write(tokenText );
-            _context.Paragraph.Append(tokenText, style);
-            index = span.End;
+            paragraph.Append(tokenText, style);
+            index = token.Span.End;
         }
 
-        if (index < _xmlText.Length)
+        if (index < _xml.Length)
         {
-            _context.Paragraph.Append(_xmlText.Substring(index), Color.DarkSlateGray1);
+            paragraph.Append(_xml.Substring(index), Color.DarkSlateGray1);
         }
+
+        return paragraph;
     }
+
+    private static Style GetStyle(XmlSyntaxKind kind, XmlTextStyles styles) => kind switch
+    {
+        XmlSyntaxKind.ElementName => styles.ElementNameStyle,
+        XmlSyntaxKind.Text => styles.TextStyle,
+        XmlSyntaxKind.Comment => styles.CommentStyle,
+        XmlSyntaxKind.ProcessingInstruction => styles.ProcessingInstructionStyle,
+        XmlSyntaxKind.DocumentTypeDeclaration => styles.DocumentTypeDeclarationStyle,
+        XmlSyntaxKind.CData => styles.CDataStyle,
+        XmlSyntaxKind.Whitespace => styles.WhitespaceStyle,
+        XmlSyntaxKind.EndElement => styles.EndElementStyle,
+        XmlSyntaxKind.OpeningAngleBracket => styles.OpeningAngleBracketStyle,
+        XmlSyntaxKind.ClosingAngleBracket => styles.ClosingAngleBracketStyle,
+        XmlSyntaxKind.AttributeName => styles.AttributeNameStyle,
+        XmlSyntaxKind.AttributeEquals => styles.AttributeEqualsStyle,
+        XmlSyntaxKind.AttributeValue => styles.AttributeValueStyle,
+        XmlSyntaxKind.AttributeQuote => styles.AttributeQuoteStyle,
+        XmlSyntaxKind.SelfClosingSlash => styles.SelfClosingSlashStyle,
+        _ => Color.White
+    };
 }

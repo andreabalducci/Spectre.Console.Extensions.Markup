@@ -1,4 +1,3 @@
-
 using Spectre.Console.Rendering;
 
 namespace Spectre.Console.Xml;
@@ -97,7 +96,7 @@ public sealed class XmlText : JustInTimeRenderable
     /// <inheritdoc/>
     protected override IRenderable Build()
     {
-        var context = new XmlBuilderContext(
+        var styles =
             new XmlTextStyles
             {
                 ElementNameStyle = ElementNameStyle ?? Color.DeepSkyBlue3_1,
@@ -115,12 +114,10 @@ public sealed class XmlText : JustInTimeRenderable
                 AttributeValueStyle = AttributeValueStyle ?? Color.White,
                 AttributeQuoteStyle = AttributeQuoteStyle ?? Color.DeepSkyBlue3_1,
                 SelfClosingSlashStyle = SelfClosingSlashStyle ?? Color.DeepSkyBlue4_2
-            }
-        );
+            };
 
-        var syntax = new XmlSyntax(_xml, context);
-        
-        syntax.Accept(XmlStyleBuilder.Shared);
-        return context.Paragraph;
+        var syntax = new XmlSyntax(_xml);
+        var paragraph = syntax.BuildStyledXmlParagraph(styles);
+        return paragraph;
     }
 }
