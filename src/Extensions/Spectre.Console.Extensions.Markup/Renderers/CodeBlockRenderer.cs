@@ -9,7 +9,7 @@ namespace Spectre.Console.Extensions.Markup.Renderers;
 
 internal sealed class CodeBlockRenderer : IRenderer<CodeBlock>
 {
-    public IRenderable Render(CodeBlock codeBlock, BlockRenderer blockRenderer)
+    public IRenderable Render(CodeBlock codeBlock)
     {
         var sb = new StringBuilder();
         var lines = codeBlock.Lines.Lines;

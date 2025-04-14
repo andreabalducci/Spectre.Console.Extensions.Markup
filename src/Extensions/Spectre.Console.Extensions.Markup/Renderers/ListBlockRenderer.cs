@@ -5,7 +5,9 @@ namespace Spectre.Console.Extensions.Markup.Renderers;
 
 internal sealed class ListBlockRenderer : IRenderer<ListBlock>
 {
-    public IRenderable Render(ListBlock listBlock, BlockRenderer blockRenderer)
+    private readonly BlockRenderer _blockRenderer = new();
+
+    public IRenderable Render(ListBlock listBlock)
     {
         var table = new Table().HideHeaders().Border(TableBorder.None);
 
@@ -27,7 +29,7 @@ internal sealed class ListBlockRenderer : IRenderer<ListBlock>
                 foreach (var block in listItem)
                 {
                     // Recursively render each block and add it to the list
-                    var blockRenderable = blockRenderer.Render(block);
+                    var blockRenderable = _blockRenderer.Render(block);
                     contentRenderables.Add(blockRenderable);
                 }
 

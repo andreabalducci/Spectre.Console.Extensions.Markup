@@ -8,7 +8,7 @@ internal sealed class LeafBlockRenderer : IRenderer<LeafBlock>
 {
     private readonly InlineRenderer _inlineRendering = new();
 
-    public IRenderable Render(LeafBlock textBlock, BlockRenderer blockRenderer)
+    public IRenderable Render(LeafBlock textBlock)
     {
         if (textBlock.Inline is null)
         {

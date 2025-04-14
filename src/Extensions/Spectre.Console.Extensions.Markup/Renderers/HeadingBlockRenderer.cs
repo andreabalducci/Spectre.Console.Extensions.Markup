@@ -9,7 +9,7 @@ internal sealed class HeadingBlockRenderer : IRenderer<HeadingBlock>
 {
     private readonly InlineRenderer _inlineRendering = new();
 
-    public IRenderable Render(HeadingBlock heading, BlockRenderer blockRenderer)
+    public IRenderable Render(HeadingBlock heading)
     {
         if (heading.Inline is null)
         {

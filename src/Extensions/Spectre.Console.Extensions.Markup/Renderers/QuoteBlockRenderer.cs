@@ -7,8 +7,9 @@ namespace Spectre.Console.Extensions.Markup.Renderers;
 internal sealed class QuoteBlockRenderer : IRenderer<QuoteBlock>
 {
     private readonly InlineRenderer _inlineRendering = new();
+    private readonly BlockRenderer _blockRenderer = new();
 
-    public IRenderable Render(QuoteBlock quoteBlock, BlockRenderer blockRenderer)
+    public IRenderable Render(QuoteBlock quoteBlock)
     {
         var renderables = new CompositeRenderable(quoteBlock.Select(x =>
         {
@@ -18,7 +19,7 @@ internal sealed class QuoteBlockRenderer : IRenderer<QuoteBlock>
             }
             else
             {
-                return blockRenderer.Render(x);
+                return _blockRenderer.Render(x);
             }
         }));
 
