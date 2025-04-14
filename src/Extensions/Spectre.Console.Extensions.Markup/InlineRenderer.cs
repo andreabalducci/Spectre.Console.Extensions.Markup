@@ -9,11 +9,12 @@ using Markdig.Extensions.Tables;
 using Markdig.Extensions.TaskLists;
 using Markdig.Syntax.Inlines;
 using Spectre.Console;
+using Spectre.Console.Extensions.Markup.Renderers;
 using Spectre.Console.Rendering;
 
 namespace Spectre.Console.Extensions.Markup;
 
-internal sealed class MarkdownInlineRendering
+internal sealed class InlineRenderer
 {
     //private readonly HttpClient _httpClient;
 
@@ -64,7 +65,7 @@ internal sealed class MarkdownInlineRendering
                     //    return canvasImage;
                     //}
 
-                    return Text.Empty;
+                    return new Text($"- image ({linkInline.Url}) here - ");
                 }
 
                 var linkInlineChildStyle = new Style(link: linkInline.Url);

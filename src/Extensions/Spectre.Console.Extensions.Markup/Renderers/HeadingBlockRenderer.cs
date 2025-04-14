@@ -3,11 +3,11 @@ using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
 using Spectre.Console.Rendering;
 
-namespace Spectre.Console.Extensions.Markup;
+namespace Spectre.Console.Extensions.Markup.Renderers;
 
-internal class HeadingBlockRenderer : IRenderer<HeadingBlock>
+internal sealed class HeadingBlockRenderer : IRenderer<HeadingBlock>
 {
-    private readonly MarkdownInlineRendering _inlineRendering = new();
+    private readonly InlineRenderer _inlineRendering = new();
 
     public IRenderable Render(HeadingBlock heading, BlockRenderer blockRenderer)
     {

@@ -5,9 +5,9 @@ using Spectre.Console.Json;
 using Spectre.Console.Rendering;
 using Spectre.Console.Xml;
 
-namespace Spectre.Console.Extensions.Markup;
+namespace Spectre.Console.Extensions.Markup.Renderers;
 
-internal class CodeBlockRenderer : IRenderer<CodeBlock>
+internal sealed class CodeBlockRenderer : IRenderer<CodeBlock>
 {
     public IRenderable Render(CodeBlock codeBlock, BlockRenderer blockRenderer)
     {

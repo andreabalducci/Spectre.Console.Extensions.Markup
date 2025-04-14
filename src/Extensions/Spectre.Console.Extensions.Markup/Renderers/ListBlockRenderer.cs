@@ -1,7 +1,7 @@
 using Markdig.Syntax;
 using Spectre.Console.Rendering;
 
-namespace Spectre.Console.Extensions.Markup;
+namespace Spectre.Console.Extensions.Markup.Renderers;
 
 internal sealed class ListBlockRenderer : IRenderer<ListBlock>
 {

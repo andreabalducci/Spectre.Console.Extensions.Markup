@@ -1,6 +1,6 @@
 using Spectre.Console.Rendering;
 
-namespace Spectre.Console.Extensions.Markup;
+namespace Spectre.Console.Extensions.Markup.Renderers;
 
 internal class CompositeRenderable : Renderable
 {

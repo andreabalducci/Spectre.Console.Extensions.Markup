@@ -2,11 +2,11 @@ using System.Text;
 using Markdig.Syntax;
 using Spectre.Console.Rendering;
 
-namespace Spectre.Console.Extensions.Markup;
+namespace Spectre.Console.Extensions.Markup.Renderers;
 
-internal class LeafBlockRenderer : IRenderer<LeafBlock>
+internal sealed class LeafBlockRenderer : IRenderer<LeafBlock>
 {
-    private readonly MarkdownInlineRendering _inlineRendering = new();
+    private readonly InlineRenderer _inlineRendering = new();
 
     public IRenderable Render(LeafBlock textBlock, BlockRenderer blockRenderer)
     {

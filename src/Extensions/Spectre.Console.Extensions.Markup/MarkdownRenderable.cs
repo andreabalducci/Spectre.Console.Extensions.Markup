@@ -1,4 +1,5 @@
 using Markdig;
+using Spectre.Console.Extensions.Markup.Renderers;
 using Spectre.Console.Rendering;
 
 namespace Spectre.Console.Extensions.Markup;

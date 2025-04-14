@@ -1,11 +1,12 @@
 using Markdig.Syntax;
+using Spectre.Console;
 using Spectre.Console.Rendering;
 
-namespace Spectre.Console.Extensions.Markup;
+namespace Spectre.Console.Extensions.Markup.Renderers;
 
-internal class QuoteBlockRenderer : IRenderer<QuoteBlock>
+internal sealed class QuoteBlockRenderer : IRenderer<QuoteBlock>
 {
-    private readonly MarkdownInlineRendering _inlineRendering = new();
+    private readonly InlineRenderer _inlineRendering = new();
 
     public IRenderable Render(QuoteBlock quoteBlock, BlockRenderer blockRenderer)
     {
