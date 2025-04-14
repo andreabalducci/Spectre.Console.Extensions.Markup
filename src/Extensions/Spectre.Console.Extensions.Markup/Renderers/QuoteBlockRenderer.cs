@@ -25,7 +25,7 @@ internal sealed class QuoteBlockRenderer : IRenderer<QuoteBlock>
 
         var panel = new Panel(renderables)
         {
-            Border = new LeftBorder(),
+            Border = new LeftBoxBorder(),
             BorderStyle = new Style(Color.Green),
             Padding = new Padding(1, 1)
         };
