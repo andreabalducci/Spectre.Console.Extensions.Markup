@@ -1,4 +1,4 @@
-namespace Spectre.Console.Xml;
+namespace Spectre.Console;
 
 internal readonly struct TextSpan
 {

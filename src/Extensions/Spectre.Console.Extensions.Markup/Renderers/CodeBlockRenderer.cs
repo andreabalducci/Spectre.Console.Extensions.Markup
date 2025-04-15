@@ -3,6 +3,7 @@ using Markdig.Syntax;
 using Spectre.Console.CSharp;
 using Spectre.Console.Json;
 using Spectre.Console.Rendering;
+using Spectre.Console.Sql;
 using Spectre.Console.Xml;
 
 namespace Spectre.Console.Extensions.Markup.Renderers;
@@ -22,6 +23,7 @@ internal sealed class CodeBlockRenderer : IRenderer<CodeBlock>
                 "json" => new Panel(new JsonText(code)),
                 "csharp" => new Panel(new CSharpText(code)),
                 "xml" => new Panel(new XmlText(code)),
+                "sql" => new Panel(new SqlText(code)),
                 _ => null
             };
 
