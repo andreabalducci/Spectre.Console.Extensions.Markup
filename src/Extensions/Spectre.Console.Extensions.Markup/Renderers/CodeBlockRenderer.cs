@@ -1,6 +1,7 @@
 using System.Text;
 using Markdig.Syntax;
 using Spectre.Console.CSharp;
+using Spectre.Console.Javascript;
 using Spectre.Console.Json;
 using Spectre.Console.Rendering;
 using Spectre.Console.Sql;
@@ -24,6 +25,7 @@ internal sealed class CodeBlockRenderer : IRenderer<CodeBlock>
                 "csharp" => new Panel(new CSharpText(code)),
                 "xml" => new Panel(new XmlText(code)),
                 "sql" => new Panel(new SqlText(code)),
+                "javascript" => new Panel(new JavascriptText(code)),
                 _ => null
             };
 

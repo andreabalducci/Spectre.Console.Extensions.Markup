@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Console.Xml", "Spec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Console.Sql", "Spectre.Console.Sql\Spectre.Console.Sql.csproj", "{FE4F3793-0E18-B0F5-EA48-41C878A6CCCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectre.Console.Javascript", "Spectre.Console.Javascript\Spectre.Console.Javascript.csproj", "{B4A937CD-574E-F00E-10D6-4290F8EF2F88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{FE4F3793-0E18-B0F5-EA48-41C878A6CCCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE4F3793-0E18-B0F5-EA48-41C878A6CCCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE4F3793-0E18-B0F5-EA48-41C878A6CCCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A937CD-574E-F00E-10D6-4290F8EF2F88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A937CD-574E-F00E-10D6-4290F8EF2F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A937CD-574E-F00E-10D6-4290F8EF2F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A937CD-574E-F00E-10D6-4290F8EF2F88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

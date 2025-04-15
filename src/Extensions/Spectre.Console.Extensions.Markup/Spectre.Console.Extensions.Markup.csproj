@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Spectre.Console.CSharp\Spectre.Console.CSharp.csproj" />
+    <ProjectReference Include="..\..\Spectre.Console.Javascript\Spectre.Console.Javascript.csproj" />
     <ProjectReference Include="..\..\Spectre.Console.Sql\Spectre.Console.Sql.csproj" />
     <ProjectReference Include="..\..\Spectre.Console.Xml\Spectre.Console.Xml.csproj" />
   </ItemGroup>
