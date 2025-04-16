@@ -9,6 +9,17 @@ internal sealed class HeadingBlockRenderer : IRenderer<HeadingBlock>
 {
     private readonly InlineRenderer _inlineRendering = new();
 
+    public HeadingBlockRenderer(MarkdownStyling styling)
+    {
+        HeadingLevel1Color = styling.HeadingLevel1Color;
+        HeadingLevel2To4Style = styling.HeadingLevel2To4Style;
+        HeadingLevel5AndAboveStyle = styling.HeadingLevel5AndAboveStyle;
+    }
+
+    public Color HeadingLevel1Color { get; }
+    public Style HeadingLevel2To4Style { get; }
+    public Style HeadingLevel5AndAboveStyle { get; }
+
     public IRenderable Render(HeadingBlock heading)
     {
         if (heading.Inline is null)
@@ -26,18 +37,18 @@ internal sealed class HeadingBlockRenderer : IRenderer<HeadingBlock>
                     bob.Append(literal.Content.ToString().EscapeMarkup());
                 }
             }
-            return new FigletText(bob.ToString());
+            return new FigletText(bob.ToString()).Color(HeadingLevel1Color);
         }
 
         if (heading.Level > 4)
         {
-            return _inlineRendering.RenderContainerInline(heading.Inline, new Style(foreground: Color.Yellow));
+            return _inlineRendering.RenderContainerInline(heading.Inline, HeadingLevel5AndAboveStyle);
         }
 
-        var content = _inlineRendering.RenderContainerInline(heading.Inline, new Style(foreground: Color.Yellow));
+        var content = _inlineRendering.RenderContainerInline(heading.Inline, HeadingLevel2To4Style);
         var rowChar = heading.Level == 2 ? '=' : '-';
 
-        var rowRow = new Text(new string(rowChar, heading.Inline.Span.Length), Color.Yellow);
+        var rowRow = new Text(new string(rowChar, heading.Inline.Span.Length), HeadingLevel2To4Style);
 
         return new Rows(content, rowRow);
     }

@@ -19,7 +19,7 @@ internal sealed class BlockRenderer
         return block switch
         {
             ParagraphBlock leafBlock => new LeafBlockRenderer().Render(leafBlock),
-            HeadingBlock heading => new HeadingBlockRenderer().Render(heading),
+            HeadingBlock heading => new HeadingBlockRenderer(_styling).Render(heading),
             ListBlock list => new ListBlockRenderer(_codeblockRenderables, _styling).Render(list),
             QuoteBlock quoteBlock => new QuoteBlockRenderer(_codeblockRenderables, _styling).Render(quoteBlock),
             FencedCodeBlock codeBlock => new CodeBlockRenderer(_codeblockRenderables, _styling).Render(codeBlock),
