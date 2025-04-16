@@ -8,10 +8,17 @@ internal sealed class CodeBlockRenderer : IRenderer<CodeBlock>
 {
     private readonly Dictionary<string, Func<string, JustInTimeRenderable>> _codeblockRenderables;
 
-    public CodeBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables)
+    public CodeBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables, MarkdownStyling styling)
     {
         _codeblockRenderables = codeblockRenderables;
+        BorderStyle = styling.CodeBlockBorderStyle;
+        Padding = styling.CodeBlockPadding;
+        Border = styling.CodeBlockBorder;
     }
+
+    public Style BorderStyle { get; }
+    public Padding Padding { get; }
+    public BoxBorder Border { get; }
 
     public IRenderable Render(CodeBlock codeBlock)
     {
@@ -32,9 +39,9 @@ internal sealed class CodeBlockRenderer : IRenderer<CodeBlock>
         }
 
         panel ??= new Panel(code.EscapeMarkup());
-        panel.BorderStyle = Color.Blue;
-        panel.Padding = new Padding(1, 0, 0, 0);
-        panel.Border = new LeftBoxBorder();
+        panel.BorderStyle = BorderStyle;
+        panel.Padding = Padding;
+        panel.Border = Border;
 
         return panel;
     }

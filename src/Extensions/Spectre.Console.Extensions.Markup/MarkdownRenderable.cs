@@ -10,6 +10,10 @@ using Spectre.Console.Xml;
 namespace Spectre.Console.Extensions.Markup;
 public sealed class MarkdownRenderable(string markdown) : Renderable
 {
+    public Style? CodeBlockBorderStyle { get; set; }
+    public Padding? CodeBlockPadding { get; set; }
+    public BoxBorder? CodeBlockBorder { get; set; }
+
     public readonly Dictionary<string, Func<string, JustInTimeRenderable>> CodeblockRenderables =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -23,7 +27,13 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
     protected override IEnumerable<Segment> Render(RenderOptions options, int maxWidth)
     {
         var ast = Markdown.Parse(markdown, MakePipeline());
-        var blockRenderer = new BlockRenderer(CodeblockRenderables);
+        var styling = new MarkdownStyling
+        {
+            CodeBlockBorderStyle = CodeBlockBorderStyle ?? Color.Blue,
+            CodeBlockPadding = CodeBlockPadding ?? new Padding(1, 0, 0, 0),
+            CodeBlockBorder = CodeBlockBorder ?? new LeftBoxBorder()
+        };
+        var blockRenderer = new BlockRenderer(CodeblockRenderables, styling);
 
         foreach (var block in ast)
         {

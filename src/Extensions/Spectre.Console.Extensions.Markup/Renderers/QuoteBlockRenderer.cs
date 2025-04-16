@@ -9,9 +9,9 @@ internal sealed class QuoteBlockRenderer : IRenderer<QuoteBlock>
     private readonly InlineRenderer _inlineRendering = new();
     private readonly BlockRenderer _blockRenderer;
 
-    public QuoteBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables)
+    public QuoteBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables, MarkdownStyling styling)
     {
-        _blockRenderer = new BlockRenderer(codeblockRenderables);
+        _blockRenderer = new BlockRenderer(codeblockRenderables, styling);
     }
 
     public IRenderable Render(QuoteBlock quoteBlock)

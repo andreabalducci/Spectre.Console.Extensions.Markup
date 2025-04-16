@@ -7,9 +7,9 @@ internal sealed class ListBlockRenderer : IRenderer<ListBlock>
 {
     private readonly BlockRenderer _blockRenderer;
 
-    public ListBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables)
+    public ListBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables, MarkdownStyling styling)
     {
-        _blockRenderer = new BlockRenderer(codeblockRenderables);
+        _blockRenderer = new BlockRenderer(codeblockRenderables, styling);
     }
 
     public IRenderable Render(ListBlock listBlock)
