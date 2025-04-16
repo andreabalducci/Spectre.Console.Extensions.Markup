@@ -1,4 +1,6 @@
 using Markdig;
+using Markdig.Parsers;
+using Markdig.Syntax;
 using Spectre.Console.CSharp;
 using Spectre.Console.Extensions.Markup.Renderers;
 using Spectre.Console.Javascript;
@@ -17,6 +19,9 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
     public Color? HeadingLevel1Color { get; set; }
     public Style? HeadingLevel2To4Style { get; set; }
     public Style? HeadingLevel5AndAboveStyle { get; set; }
+
+    public char? ListBlockMarker { get; set; }
+    public Style? ListBlockMarkerStyle { get; set; }
 
     public readonly Dictionary<string, Func<string, JustInTimeRenderable>> CodeblockRenderables =
         new(StringComparer.OrdinalIgnoreCase)
@@ -38,7 +43,9 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
             CodeBlockBorder = CodeBlockBorder ?? new LeftBoxBorder(),
             HeadingLevel1Color = HeadingLevel1Color ?? Color.White,
             HeadingLevel2To4Style = HeadingLevel2To4Style ?? Color.Yellow,
-            HeadingLevel5AndAboveStyle = HeadingLevel5AndAboveStyle ?? Color.Yellow
+            HeadingLevel5AndAboveStyle = HeadingLevel5AndAboveStyle ?? Color.Yellow,
+            ListBlockMarker = ListBlockMarker ?? '\u25cb',
+            ListBlockMarkerStyle = ListBlockMarkerStyle ?? Color.Green,
         };
         var blockRenderer = new BlockRenderer(CodeblockRenderables, styling);
 

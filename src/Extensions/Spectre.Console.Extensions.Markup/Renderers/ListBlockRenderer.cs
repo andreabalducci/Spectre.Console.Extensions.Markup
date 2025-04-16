@@ -10,7 +10,12 @@ internal sealed class ListBlockRenderer : IRenderer<ListBlock>
     public ListBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables, MarkdownStyling styling)
     {
         _blockRenderer = new BlockRenderer(codeblockRenderables, styling);
+        Marker = styling.ListBlockMarker;
+        MarkerStyle = styling.ListBlockMarkerStyle;
     }
+
+    public char Marker { get; }
+    public Style MarkerStyle { get; }
 
     public IRenderable Render(ListBlock listBlock)
     {
@@ -25,7 +30,7 @@ internal sealed class ListBlockRenderer : IRenderer<ListBlock>
         {
             if (item is ListItemBlock listItem)
             {
-                var marker = listBlock.IsOrdered ? $"{index}." : "\u25cb";
+                var marker = listBlock.IsOrdered ? $"{index}." : Marker.ToString();
                 index++;
 
                 // Create a list of renderables for all blocks in the list item
@@ -42,7 +47,7 @@ internal sealed class ListBlockRenderer : IRenderer<ListBlock>
                 var contentRows = new Rows(contentRenderables);
 
                 // Add the marker and content to the table
-                table.AddRow(new Text(marker, Color.Green), contentRows);
+                table.AddRow(new Text(marker, MarkerStyle), contentRows);
             }
         }
 

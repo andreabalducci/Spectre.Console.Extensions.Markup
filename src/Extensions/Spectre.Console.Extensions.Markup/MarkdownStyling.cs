@@ -8,4 +8,7 @@ internal class MarkdownStyling
     public Color HeadingLevel1Color { get; set; } = default!;
     public Style HeadingLevel2To4Style { get; set; } = default!;
     public Style HeadingLevel5AndAboveStyle { get; set; } = default!;
+
+    public char ListBlockMarker { get; set; }
+    public Style ListBlockMarkerStyle { get; set; } = default!;
 }
