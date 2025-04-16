@@ -1,6 +1,4 @@
 using Markdig;
-using Markdig.Parsers;
-using Markdig.Syntax;
 using Spectre.Console.CSharp;
 using Spectre.Console.Extensions.Markup.Renderers;
 using Spectre.Console.Javascript;
@@ -12,21 +10,60 @@ using Spectre.Console.Xml;
 namespace Spectre.Console.Extensions.Markup;
 public sealed class MarkdownRenderable(string markdown) : Renderable
 {
+    /// <summary>
+    /// Gets or sets the style for the border of a code block.
+    /// </summary>
     public Style? CodeBlockBorderStyle { get; set; }
+
+    /// <summary>
+    /// Gets or sets the padding for a code block.
+    /// </summary>
     public Padding? CodeBlockPadding { get; set; }
+
+    /// <summary>
+    /// Gets or sets the border type for a code block.
+    /// </summary>
     public BoxBorder? CodeBlockBorder { get; set; }
 
+    /// <summary>
+    /// Gets or sets the color for level 1 headings.
+    /// </summary>
     public Color? HeadingLevel1Color { get; set; }
+
+    /// <summary>
+    /// Gets or sets the style for level 2 to 4 headings.
+    /// </summary>
     public Style? HeadingLevel2To4Style { get; set; }
+
+    /// <summary>
+    /// Gets or sets the style for level 5 and above headings.
+    /// </summary>
     public Style? HeadingLevel5AndAboveStyle { get; set; }
 
+    /// <summary>
+    /// Gets or sets the marker character for list blocks.
+    /// </summary>
     public char? ListBlockMarker { get; set; }
+
+    /// <summary>
+    /// Gets or sets the style for the marker of list blocks.
+    /// </summary>
     public Style? ListBlockMarkerStyle { get; set; }
 
+    /// <summary>
+    /// Gets or sets the style for the border of a quote block.
+    /// </summary>
     public Style? QuoteBlockBorderStyle { get; set; }
-    public Padding? QuoteBlockPadding { get; set; }
-    public BoxBorder? QuoteBlockBorder { get; set; }
 
+    /// <summary>
+    /// Gets or sets the padding for a quote block.
+    /// </summary>
+    public Padding? QuoteBlockPadding { get; set; }
+
+    /// <summary>
+    /// Gets or sets the border type for a quote block.
+    /// </summary>
+    public BoxBorder? QuoteBlockBorder { get; set; }
 
     public readonly Dictionary<string, Func<string, JustInTimeRenderable>> CodeblockRenderables =
         new(StringComparer.OrdinalIgnoreCase)
