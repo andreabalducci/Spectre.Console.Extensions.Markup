@@ -1,4 +1,3 @@
-using System.Text;
 using Markdig.Syntax;
 using Spectre.Console.Rendering;
 
