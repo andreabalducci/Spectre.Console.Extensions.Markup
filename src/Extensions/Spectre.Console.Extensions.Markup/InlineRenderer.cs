@@ -78,11 +78,8 @@ internal sealed class InlineRenderer
                 break;
             case LinkDelimiterInline:
                 break;
-
-            // Line breaks in document don't necessarily correspond to what we'd like to see in the output.
             case LineBreakInline:
-                break;
-
+                return Text.NewLine;
             case ContainerInline containerInline:
                 return RenderContainerInline(containerInline);
             case LiteralInline literalInline:
