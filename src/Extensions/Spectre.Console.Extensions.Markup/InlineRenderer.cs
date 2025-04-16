@@ -55,7 +55,8 @@ internal sealed class InlineRenderer
                             2 => Decoration.Bold,
                             _ => Decoration.None,
                         };
-                var emphasisChildStyle = new Style(decoration: styleDecoration);
+
+                var emphasisChildStyle = new Style(decoration: styleDecoration, foreground: styleDecoration == Decoration.Bold ? Color.White : Color.Default);
                 return RenderContainerInline(emphasisInline, emphasisChildStyle);
             case LinkInline linkInline:
                 if (linkInline.IsImage)
