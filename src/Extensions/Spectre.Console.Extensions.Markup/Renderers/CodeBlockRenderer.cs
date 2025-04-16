@@ -1,16 +1,18 @@
 using System.Text;
 using Markdig.Syntax;
-using Spectre.Console.CSharp;
-using Spectre.Console.Javascript;
-using Spectre.Console.Json;
 using Spectre.Console.Rendering;
-using Spectre.Console.Sql;
-using Spectre.Console.Xml;
 
 namespace Spectre.Console.Extensions.Markup.Renderers;
 
 internal sealed class CodeBlockRenderer : IRenderer<CodeBlock>
 {
+    private readonly Dictionary<string, Func<string, JustInTimeRenderable>> _codeblockRenderables;
+
+    public CodeBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables)
+    {
+        _codeblockRenderables = codeblockRenderables;
+    }
+
     public IRenderable Render(CodeBlock codeBlock)
     {
         var code = GetLinesAsString(codeBlock);
@@ -19,24 +21,17 @@ internal sealed class CodeBlockRenderer : IRenderer<CodeBlock>
 
         if (codeBlock is FencedCodeBlock fencedCodeBlock && !string.IsNullOrEmpty(fencedCodeBlock.Info))
         {
-            panel = fencedCodeBlock.Info!.ToLowerInvariant() switch
+            if (_codeblockRenderables.TryGetValue(fencedCodeBlock.Info!, out var renderableFactory))
             {
-                "json" => new Panel(new JsonText(code)),
-                "csharp" => new Panel(new CSharpText(code)),
-                "xml" => new Panel(new XmlText(code)),
-                "sql" => new Panel(new SqlText(code)),
-                "javascript" => new Panel(new JavascriptText(code)),
-                _ => null
-            };
-
-            if (panel is not null)
-            {
-                panel.Header = new PanelHeader(fencedCodeBlock.Info.EscapeMarkup());
+                var renderable = renderableFactory(code);
+                panel = new Panel(renderable)
+                {
+                    Header = new PanelHeader(fencedCodeBlock.Info.EscapeMarkup())
+                };
             }
         }
 
         panel ??= new Panel(code.EscapeMarkup());
-
         panel.BorderStyle = Color.Blue;
         panel.Padding = new Padding(1, 0, 0, 0);
         panel.Border = new LeftBoxBorder();

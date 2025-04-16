@@ -7,7 +7,12 @@ namespace Spectre.Console.Extensions.Markup.Renderers;
 internal sealed class QuoteBlockRenderer : IRenderer<QuoteBlock>
 {
     private readonly InlineRenderer _inlineRendering = new();
-    private readonly BlockRenderer _blockRenderer = new();
+    private readonly BlockRenderer _blockRenderer;
+
+    public QuoteBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables)
+    {
+        _blockRenderer = new BlockRenderer(codeblockRenderables);
+    }
 
     public IRenderable Render(QuoteBlock quoteBlock)
     {

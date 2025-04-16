@@ -5,7 +5,12 @@ namespace Spectre.Console.Extensions.Markup.Renderers;
 
 internal sealed class ListBlockRenderer : IRenderer<ListBlock>
 {
-    private readonly BlockRenderer _blockRenderer = new();
+    private readonly BlockRenderer _blockRenderer;
+
+    public ListBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables)
+    {
+        _blockRenderer = new BlockRenderer(codeblockRenderables);
+    }
 
     public IRenderable Render(ListBlock listBlock)
     {

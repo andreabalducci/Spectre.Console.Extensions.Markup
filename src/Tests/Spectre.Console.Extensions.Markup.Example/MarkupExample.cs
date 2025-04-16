@@ -208,7 +208,19 @@ internal static class MarkupExample
            </GlossList>
           </GlossDiv>
          </glossary>
-         ```
+        ```
+
+        ```html
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <title>Example</title>
+            </head>
+            <body>
+                <p>This is an example of a simple HTML page with one paragraph.</p>
+            </body>
+        </html>
+        ```
 
         ```sql
         -- Create a table with various data types and constraints
