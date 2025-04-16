@@ -12,7 +12,14 @@ internal sealed class QuoteBlockRenderer : IRenderer<QuoteBlock>
     public QuoteBlockRenderer(Dictionary<string, Func<string, JustInTimeRenderable>> codeblockRenderables, MarkdownStyling styling)
     {
         _blockRenderer = new BlockRenderer(codeblockRenderables, styling);
+        BorderStyle = styling.QuoteBlockBorderStyle;
+        Padding = styling.QuoteBlockPadding;
+        Border = styling.QuoteBlockBorder;
     }
+
+    public Style BorderStyle { get; }
+    public Padding Padding { get; }
+    public BoxBorder Border { get; }
 
     public IRenderable Render(QuoteBlock quoteBlock)
     {
@@ -30,9 +37,9 @@ internal sealed class QuoteBlockRenderer : IRenderer<QuoteBlock>
 
         var panel = new Panel(renderables)
         {
-            Border = new LeftBoxBorder(),
-            BorderStyle = new Style(Color.Green),
-            Padding = new Padding(1, 1)
+            Border = Border,
+            BorderStyle = BorderStyle,
+            Padding = Padding
         };
 
         return panel;

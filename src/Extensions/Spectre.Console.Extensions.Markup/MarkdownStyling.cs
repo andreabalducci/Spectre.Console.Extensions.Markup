@@ -11,4 +11,8 @@ internal class MarkdownStyling
 
     public char ListBlockMarker { get; set; }
     public Style ListBlockMarkerStyle { get; set; } = default!;
+
+    public Style QuoteBlockBorderStyle { get; set; } = default!;
+    public Padding QuoteBlockPadding { get; set; } = default!;
+    public BoxBorder QuoteBlockBorder { get; set; } = default!;
 }

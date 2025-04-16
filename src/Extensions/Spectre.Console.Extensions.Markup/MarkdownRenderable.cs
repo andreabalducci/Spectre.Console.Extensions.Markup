@@ -23,6 +23,11 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
     public char? ListBlockMarker { get; set; }
     public Style? ListBlockMarkerStyle { get; set; }
 
+    public Style? QuoteBlockBorderStyle { get; set; }
+    public Padding? QuoteBlockPadding { get; set; }
+    public BoxBorder? QuoteBlockBorder { get; set; }
+
+
     public readonly Dictionary<string, Func<string, JustInTimeRenderable>> CodeblockRenderables =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -46,6 +51,10 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
             HeadingLevel5AndAboveStyle = HeadingLevel5AndAboveStyle ?? Color.Yellow,
             ListBlockMarker = ListBlockMarker ?? '\u25cb',
             ListBlockMarkerStyle = ListBlockMarkerStyle ?? Color.Green,
+            QuoteBlockBorderStyle = QuoteBlockBorderStyle ?? Color.Green,
+            QuoteBlockPadding = QuoteBlockPadding ?? new Padding(1, 1),
+            QuoteBlockBorder = QuoteBlockBorder ?? new LeftBoxBorder(),
+
         };
         var blockRenderer = new BlockRenderer(CodeblockRenderables, styling);
 
