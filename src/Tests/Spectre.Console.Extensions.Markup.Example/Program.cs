@@ -14,6 +14,11 @@ internal class Program
         var md = MarkupExample.GetSampleText();
         var markup = new MarkdownRenderable(md);
 
+        //Override Heading colors
+        markup.HeadingLevel1Color = Color.Yellow2;
+        markup.HeadingLevel2To4Style = Color.DarkOliveGreen1_1;
+        markup.HeadingLevel5AndAboveStyle = Color.DarkSeaGreen1_1;
+
         //use the xml renderer for html
         markup.CodeblockRenderables.Add("html", code => new XmlText(code));
 
