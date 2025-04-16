@@ -42,7 +42,7 @@ internal sealed class HeadingBlockRenderer : IRenderer<HeadingBlock>
 
         if (heading.Level > 4)
         {
-            return _inlineRendering.RenderContainerInline(heading.Inline, HeadingLevel5AndAboveStyle);
+            return new Rows(_inlineRendering.RenderContainerInline(heading.Inline, HeadingLevel5AndAboveStyle));
         }
 
         var content = _inlineRendering.RenderContainerInline(heading.Inline, HeadingLevel2To4Style);
