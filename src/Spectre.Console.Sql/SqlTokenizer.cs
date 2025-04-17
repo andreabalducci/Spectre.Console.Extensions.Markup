@@ -54,7 +54,7 @@ internal static class SqlTokenizer
                     i++;
                 }
 
-                if (span[i] == '\n')
+                if (i < span.Length && span[i] == '\n')
                 {
                     i++; // Include the newline character
                 }
