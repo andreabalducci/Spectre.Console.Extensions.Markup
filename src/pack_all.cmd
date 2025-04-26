@@ -1,0 +1,5 @@
+dotnet pack "Spectre.Console.CSharp\Spectre.Console.CSharp.csproj" --configuration Release --output "Z:\nuget"
+dotnet pack "Spectre.Console.Javascript\Spectre.Console.Javascript.csproj" --configuration Release --output "Z:\nuget"
+dotnet pack "Spectre.Console.Sql\Spectre.Console.Sql.csproj" --configuration Release --output "Z:\nuget"
+dotnet pack "Spectre.Console.Xml\Spectre.Console.Xml.csproj" --configuration Release --output "Z:\nuget"
+dotnet pack "Extensions\Spectre.Console.Extensions.Markup\Spectre.Console.Extensions.Markup.csproj" --configuration Release --output "Z:\nuget"
