@@ -15,4 +15,6 @@ internal class MarkdownStyling
     public Style QuoteBlockBorderStyle { get; set; } = default!;
     public Padding QuoteBlockPadding { get; set; } = default!;
     public BoxBorder QuoteBlockBorder { get; set; } = default!;
+    public Style TableBorderStyle { get; set; } = default!;
+    public TableBorder TableBorder { get; set; } = default!;
 }

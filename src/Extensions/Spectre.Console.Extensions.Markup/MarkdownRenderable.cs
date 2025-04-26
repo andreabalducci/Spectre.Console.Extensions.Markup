@@ -65,6 +65,16 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
     /// </summary>
     public BoxBorder? QuoteBlockBorder { get; set; }
 
+    /// <summary>
+    /// Gets or sets the style for the border of a table.
+    /// </summary>
+    public Color? TableBorderStyle { get; set; }
+
+    /// <summary>
+    /// Gets or sets the border type for a table.
+    /// </summary>
+    public TableBorder? TableBorder { get; set; }
+
     public readonly Dictionary<string, Func<string, JustInTimeRenderable>> CodeblockRenderables =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -91,6 +101,8 @@ public sealed class MarkdownRenderable(string markdown) : Renderable
             QuoteBlockBorderStyle = QuoteBlockBorderStyle ?? Color.Green,
             QuoteBlockPadding = QuoteBlockPadding ?? new Padding(1, 1),
             QuoteBlockBorder = QuoteBlockBorder ?? new LeftBoxBorder(),
+            TableBorderStyle = TableBorderStyle ?? Color.White,
+            TableBorder = TableBorder ?? TableBorder.Square
 
         };
         var blockRenderer = new BlockRenderer(CodeblockRenderables, styling);

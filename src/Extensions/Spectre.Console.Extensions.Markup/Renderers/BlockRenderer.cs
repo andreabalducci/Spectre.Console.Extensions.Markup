@@ -25,6 +25,7 @@ internal sealed class BlockRenderer
             FencedCodeBlock codeBlock => new CodeBlockRenderer(_codeblockRenderables, _styling).Render(codeBlock),
             CodeBlock codeBlock => new CodeBlockRenderer(_codeblockRenderables, _styling).Render(codeBlock),
             ThematicBreakBlock => new Grid() { Width = 120 }.AddColumn().AddRow(new Rule()),
+            Markdig.Extensions.Tables.Table tableBlock => new TableRenderer(_codeblockRenderables, _styling).Render(tableBlock),
             _ => new Paragraph(),
         };
     }
