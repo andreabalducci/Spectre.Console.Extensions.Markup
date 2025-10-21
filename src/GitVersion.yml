@@ -1,0 +1,8 @@
+mode: ContinuousDelivery
+assembly-versioning-scheme: MajorMinorPatch
+commit-message-incrementing: Enabled
+branches:
+  feature:
+    source-branches: ['develop']
+    increment: Patch
+    mode: ContinuousDelivery

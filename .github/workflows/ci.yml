@@ -80,7 +80,7 @@ jobs:
         shell: pwsh
         run: |
          
-          ./src/pack.ps1 -Configuration debug -CreateNugetPackages $true -RunGitVersion $true -ForceInstallPackage $true
+          ./src/pack.ps1 -Configuration release -CreateNugetPackages $true -RunGitVersion $true -ForceInstallPackage $true
 
       - name: Generate artifact attestation
         if: ${{ github.repository == 'crwsolutions/Spectre.Console.Extensions.Markup' }}

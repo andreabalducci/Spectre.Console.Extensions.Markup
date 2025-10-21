@@ -107,7 +107,7 @@ if ($RunGitVersion) {
             Write-Host "GitVersion found: $($gitversion.fullSemver)"
             $assemblyVersion = $gitversion.assemblyVersion
             $assemblyFileVersion = $gitversion.assemblyFileVersion
-            $nugetVersion = $gitversion.nugetVersion
+            $nugetVersion = $gitversion.fullSemver
             $assemblyInformationalVersion = $gitversion.assemblyInformationalVersion
         }
         catch {
