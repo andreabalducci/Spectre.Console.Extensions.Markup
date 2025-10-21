@@ -101,7 +101,7 @@ if ($RunGitVersion) {
         Write-Host "No GitVersion env vars found; run GitVersion locally (if available)..."
         try {
         
-            $gitversion = dotnet-gitversion /config GitVersion.yml | ConvertFrom-Json 
+            $gitversion = dotnet-gitversion /config "$runningDirectory/GitVersion.yml" | ConvertFrom-Json 
             Assert-LastExecution -message "GitVersion execution failed." -haltExecution $true
             
             Write-Host "GitVersion run: $($gitversion)"
