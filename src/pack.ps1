@@ -102,6 +102,8 @@ if ($RunGitVersion) {
         try {
         
             $gitversion = dotnet-gitversion /config GitVersion.yml | ConvertFrom-Json 
+            Assert-LastExecution -message "GitVersion execution failed." -haltExecution $true
+            
             Write-Host "GitVersion run: $($gitversion)"
             $assemblyVersion = $gitversion.AssemblySemFileVer
             $assemblyFileVersion = $gitversion.FullSemVer
