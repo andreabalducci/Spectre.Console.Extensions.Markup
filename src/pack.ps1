@@ -98,32 +98,30 @@ if ($RunGitVersion) {
         $assemblyInformationalVersion = $env:GITVERSION_INFORMATIONALVERSION
     }
     else {
-        Write-Host "No GitVersion env vars found; attempting to restore dotnet tools and run GitVersion locally (if available)..."
-        dotnet tool restore
-        if ($LASTEXITCODE -ne 0) { Write-Warning "dotnet tool restore failed or no tools to restore." }
-
+        Write-Host "No GitVersion env vars found; run GitVersion locally (if available)..."
         try {
-            $gitversion = Invoke-GitVersion -ConfigurationFile "$runningDirectory/.config/GitVersion.yml" -ErrorAction Stop
-            Write-Host "GitVersion found: $($gitversion.fullSemver)"
-            $assemblyVersion = $gitversion.assemblyVersion
-            $assemblyFileVersion = $gitversion.assemblyFileVersion
-            $nugetVersion = $gitversion.fullSemver
-            $assemblyInformationalVersion = $gitversion.assemblyInformationalVersion
+        
+            $gitversion = dotnet-gitversion /config GitVersion.yml | ConvertFrom-Json 
+            Write-Host "GitVersion run: $($gitversion)"
+            $assemblyVersion = $gitversion.AssemblySemFileVer
+            $assemblyFileVersion = $gitversion.FullSemVer
+            $nugetVersion = $gitversion.FullSemVer
+            $assemblyInformationalVersion = $gitversion.InformationalVersion
         }
         catch {
             Write-Warning "Invoke-GitVersion not available or failed, falling back to 1.0.0"
-            $assemblyVersion = "1.0.0"
-            $assemblyFileVersion = "1.0.0"
-            $nugetVersion = "1.0.0"
-            $assemblyInformationalVersion = "1.0.0"
+            $assemblyVersion = "0.0.0"
+            $assemblyFileVersion = "0.0.0"
+            $nugetVersion = "0.0.0"
+            $assemblyInformationalVersion = "0.0.0"
         }
     }
 }
 else {
-    $assemblyVersion = "1.0.0"
-    $assemblyFileVersion = "1.0.0"
-    $nugetVersion = "1.0.0"
-    $assemblyInformationalVersion = "1.0.0"
+    $assemblyVersion = "0.0.0"
+    $assemblyFileVersion = "0.0.0"
+    $nugetVersion = "0.0.0"
+    $assemblyInformationalVersion = "0.0.0"
 }
 
 Write-Host "AssemblyVersion: $assemblyVersion FileVersion: $assemblyFileVersion NuGet: $nugetVersion"
